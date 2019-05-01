@@ -1,19 +1,29 @@
-
 <html>
-    <head>
-      <meta charset="utf-8">
-      <title>Découverto: lecteur de QR-Code</title>
-      <link type="text/css" rel="stylesheet" href="./css/build.css">
-    </head>
-    <body>
-      <h1>Découverto: lecteur de QR-Code</h1>
-      <div id="loadingMessage">🎥 Impossible d'accéder à la caméra (assurez vous que la caméra est activé)</div>
-      <canvas id="canvas" hidden></canvas>
-      <div id="output" hidden>
-        <div id="outputMessage">Aucun QR-Code detecté.</div>
-        <div hidden><b>Data:</b> <span id="outputData"></span></div>
-      </div>
-      <script src="./js/build.js"></script>
-    </body>
-    </html>
-    
+
+<head>
+  <meta charset="utf-8">
+  <title>Découverto: lecteur de QR-Code</title>
+  <link type="text/css" rel="stylesheet" href="./css/build.css">
+</head>
+
+<body>
+  <h1>Découverto: lecteur de QR-Code</h1>
+  <div id="loadingMessage">🎥 Impossible d'accéder à la caméra (assurez vous que la caméra est activé)</div>
+  <div id="start-container">
+      <a id="start">Activer la caméra</a>
+  </div>
+  <canvas id="canvas" hidden></canvas>
+  <div id="output" hidden>
+    <div id="outputMessage">Aucun QR-Code detecté.</div>
+    <div hidden><b>Résultat:</b> <span id="outputData"></span>
+      <p>
+        <a id="link-web" target="_blank">Ouvrir le lien</a>
+        <a id="link-app" target="_blank">Ouvrir dans l'application</a>
+      </p>
+    </div>
+  </div>
+  
+  <script src="./js/build.js"></script>
+</body>
+
+</html>

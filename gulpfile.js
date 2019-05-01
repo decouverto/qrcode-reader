@@ -9,8 +9,16 @@ var rename = require('gulp-rename');
 var csso = require('gulp-csso');
 var autoprefixer = require('gulp-autoprefixer');
 var through = require('through');
-
+var request = require('request');
+var htmlmin = require('gulp-htmlmin');
+var fs = require('fs');
 var isDist = process.argv.indexOf('serve') === -1;
+
+
+
+gulp.task('favicon', function () {
+  return request('https://decouverto.fr/favicon.ico').pipe(fs.createWriteStream('./dist/favicon.ico'));
+});
 
 gulp.task('css', function () {
     return gulp.src('src/css/main.css')
@@ -53,6 +61,7 @@ gulp.task('reload', function (done) {
 
 gulp.task('html', function () {
     gulp.src('./src/index.html')
+        .pipe(htmlmin({ collapseWhitespace: true }))
         .pipe(gulp.dest('./dist/'));
 });
 
@@ -61,7 +70,7 @@ gulp.task('html-watch', ['html'], function (done) {
     done();
 });
 
-gulp.task('default', ['js', 'css', 'html']);
+gulp.task('default', ['favicon', 'js', 'css', 'html']);
 
 
 gulp.task('serve', ['js', 'css', 'html'], function () {

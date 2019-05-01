@@ -6,6 +6,20 @@ var loadingMessage = document.getElementById('loadingMessage');
 var outputContainer = document.getElementById('output');
 var outputMessage = document.getElementById('outputMessage');
 var outputData = document.getElementById('outputData');
+var linkApp = document.getElementById('link-app');
+var linkWeb = document.getElementById('link-web');
+var startCamera = document.getElementById('start');
+var playing = false;
+
+function getDomain(url) {
+    url = url.replace(/(https?:\/\/)?(www.)?/i, '');
+    url = url.split('.');
+    url = url.slice(url.length - 2).join('.');
+    if (url.indexOf('/') !== -1) {
+        return url.split('/')[0];
+    }
+    return url;
+}
 
 function drawLine(begin, end, color) {
     canvas.beginPath();
@@ -26,6 +40,8 @@ navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } }).th
 
 function tick() {
     if (video.readyState === video.HAVE_ENOUGH_DATA) {
+        playing = true;
+        startCamera.style.display = 'none';
         loadingMessage.hidden = true;
         canvasElement.hidden = false;
         outputContainer.hidden = false;
@@ -45,12 +61,29 @@ function tick() {
             outputMessage.hidden = true;
             outputData.parentElement.hidden = false;
             outputData.innerText = code.data;
-        } else {
-            outputMessage.hidden = false;
-            outputData.parentElement.hidden = true;
+            linkWeb.href = code.data
+            if (getDomain(code.data) == 'decouverto.fr') {
+                var reg = /.+?\:\/\/.+?(\/.+?)(?:#|\?|$)/;
+                var pathname = reg.exec(code.data)[1];  
+                linkApp.href = 'decouverto://decouverto' + pathname;
+                linkApp.style.display = 'inline-block';
+            } else {
+                linkApp.style.display = 'none';
+            }
         }
     } else {
+        playing = false;
+        startCamera.style.display = 'inline-block';
         loadingMessage.innerText = '⌛ Chargement de la vidéo...'
     }
     requestAnimationFrame(tick);
+}
+
+startCamera.onclick = function () {
+    navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } }).then(function (stream) {
+        video.srcObject = stream;
+        video.setAttribute('playsinline', true); // required to tell iOS safari we don't want fullscreen
+        video.play();
+        requestAnimationFrame(tick);
+    });
 }

@@ -36,5 +36,9 @@
     "start": "gulp serve",
     "build": "gulp"
   },
-  "homepage": "https://github.com/decouverto/qrcode-reader#readme"
+  "homepage": "https://github.com/decouverto/qrcode-reader#readme",
+  "dependencies": {
+    "gulp-htmlmin": "^5.0.1",
+    "request": "^2.88.0"
+  }
 }

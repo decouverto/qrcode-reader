@@ -4,46 +4,63 @@ body {
     max-width: 640px;
     margin: 0 auto;
     position: relative;
-  }
+}
 
-  #githubLink {
-    position: absolute;
-    right: 0;
-    top: 12px;
-    color: #2D99FF;
-  }
-
-  h1 {
+h1 {
     margin: 10px 0;
     font-size: 40px;
-  }
+}
 
-  #loadingMessage {
+#loadingMessage {
     text-align: center;
     padding: 40px;
     background-color: #eee;
-  }
+}
 
-  #canvas {
+#start-container {
+    text-align: center
+}
+
+#start {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#canvas {
     width: 100%;
-  }
+}
 
-  #output {
+#output {
     margin-top: 20px;
     background: #eee;
     padding: 10px;
     padding-bottom: 0;
-  }
+}
 
-  #output div {
+#output div {
     padding-bottom: 10px;
     word-wrap: break-word;
-  }
+}
 
-  #noQRFound {
+#noQRFound {
     text-align: center;
-  }
-  @media (max-width: 1000px) {
+}
+
+a {
+    box-shadow: 0 0 1px rgba(0, 0, 0, .11), 0 1px 2px rgba(0, 0, 0, .22);
+    margin: 5px;
+    display: inline-block;
+    text-decoration: none;
+    border: none;
+    padding: 10px;
+    background-color: inherit;
+    color: inherit;
+    font-size: 1.1rem;
+}
+a:hover {
+    background-color: #c7c7c7;
+}
+@media (max-width: 1000px) {
     body {
         margin-left: 0;
         margin-right: 0;
