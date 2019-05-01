@@ -15,7 +15,6 @@ var fs = require('fs');
 var isDist = process.argv.indexOf('serve') === -1;
 
 
-
 gulp.task('favicon', function () {
   return request('https://decouverto.fr/favicon.ico').pipe(fs.createWriteStream('./dist/favicon.ico'));
 });
